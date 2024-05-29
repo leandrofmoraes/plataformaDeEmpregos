@@ -1,0 +1,48 @@
+{
+  "dadosPessoais": {
+    "nome": "João",
+    "sobrenome": "Silva",
+    "cpf": "72699577030",
+    "dataNascimento": "1990-01-01",
+    "genero": "Masculino",
+    "nacionalidade": "Brasileiro"
+  },
+  "contato": {
+    "telefone": "11223344",
+    "celular": "99887766",
+    "email": "joao.silva@example.com",
+    "site": "www.joaosilva.com"
+  },
+  "endereco": {
+    "cep": "12345678",
+    "logradouro": "Rua Teste",
+    "numero": "123",
+    "complemento": "Apartamento 101",
+    "bairro": "Centro",
+    "cidade": "São Paulo",
+    "uf": "SP"
+  },
+  "formacao": {
+    "curso": "Ciência da Computação",
+    "nivel": "Graduação",
+    "instituicao": "Universidade Teste",
+    "dataInicio": "2015-01-01",
+    "dataConclusao": "2019-12-31"
+  },
+  "dadosProfissionais": [
+    {
+      "empresa": "Empresa A",
+      "cargo": "Analista de Dados",
+      "dataInicio": "2020-01-01",
+      "dataFim": "2021-12-31",
+      "descricao": "Responsável pela análise de dados"
+    },
+    {
+      "empresa": "Empresa B",
+      "cargo": "Desenvolvedor Web",
+      "dataInicio": "2018-01-01",
+      "dataFim": "2019-12-31",
+      "descricao": "Desenvolvimento de aplicações web"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: db_proj_casa_um
+    ports:
+      - "3306:3306"
+    networks:
+      - my-network
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      retries: 10
+      interval: 3s
+      timeout: 30s
+  plataformadecurriculos:
+    image: plataformadecurriculos:0.1.1
+    container_name: plataforma-de-curriculos
+    # depends_on:
+    #   - mysql
+    depends_on:
+      mysql:
+        condition: service_healthy
+    # restart: on-failure
+    environment:
+      JAVA_OPTS: -Dspring.profiles.active=prod
+      DATASOURCE_URL: jdbc:mysql://mysql:3306/db_proj_casa_um
+      DATASOURCE_USERNAME: root
+      DATASOURCE_PASSWORD: root
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge

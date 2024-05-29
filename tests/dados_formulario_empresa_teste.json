@@ -1,0 +1,23 @@
+{
+  "contato": {
+    "telefone": "(11) 1234-5678",
+    "celular": "(11) 98765-4321",
+    "email": "empresa@example.com",
+    "site": "http://www.empresa.com"
+  },
+  "endereco": {
+    "cep": "12345678",
+    "logradouro": "Rua Teste",
+    "numero": "123",
+    "complemento": "Sala 101",
+    "bairro": "Centro",
+    "cidade": "São Paulo",
+    "uf": "SP"
+  },
+  "empresa": {
+    "cnpj": "14344831502026",
+    "razaoSocial": "Empresa Exemplo LTDA",
+    "nomeFantasia": "Empresa Exemplo",
+    "areaDeAtuacao": "Tecnologia"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "titulo": "Desenvolvedor Java",
+  "cargo": "Desenvolvedor",
+  "formatoDeTrabalho": "REMOTO",
+  "idEmpresa": 1,
+  "formacaoRequerida": "Superior completo em Ciência da Computação ou áreas relacionadas",
+  "experienciaRequerida": 3,
+  "habilidadesRequeridas": "Java, Spring Boot, Hibernate",
+  "descricao": "Desenvolvimento de aplicações web utilizando Java e Spring Boot",
+  "salario": 8000.00,
+  "dataPublicacao": "2024-03-07"
+}
