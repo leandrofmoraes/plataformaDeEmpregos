@@ -3,7 +3,7 @@ package br.com.plataformaDeEmpregos.models.curriculo;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import org.springframework.beans.BeanUtils;
+// import org.springframework.beans.BeanUtils;
 
 import br.com.plataformaDeEmpregos.dtos.curriculo.DadosProfissionaisDTO;
 import jakarta.persistence.Column;
@@ -48,7 +48,12 @@ public class DadosProfissionaisModel implements Serializable {
   private String descricao;
 
   public DadosProfissionaisModel(DadosProfissionaisDTO dados) {
-    BeanUtils.copyProperties(dados, this);
+    // BeanUtils.copyProperties(dados, this);
+    this.empresa = dados.empresa();
+    this.cargo = dados.cargo();
+    this.dataInicio = dados.dataInicio();
+    this.dataFim = dados.dataFim();
+    this.descricao = dados.descricao();
   }
 
   public void atualizarInformacoes(DadosProfissionaisDTO dados){

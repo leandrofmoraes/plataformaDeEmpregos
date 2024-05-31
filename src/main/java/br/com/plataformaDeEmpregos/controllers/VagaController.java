@@ -21,6 +21,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.plataformaDeEmpregos.dtos.vaga.AtualizacaoVagaDTO;
 import br.com.plataformaDeEmpregos.dtos.vaga.CadastroVagaDTO;
 import br.com.plataformaDeEmpregos.dtos.vaga.DetalhamentoVagaDTO;
+import br.com.plataformaDeEmpregos.dtos.vaga.ExibirVagaDTO;
 import br.com.plataformaDeEmpregos.services.VagaService;
 import jakarta.validation.Valid;
 
@@ -80,7 +81,7 @@ public class VagaController {
 * @return ResponseEntity.ok(page) - Retorna um objeto ResponseEntity com o código de status HTTP 200 OK e o {@link DadosDetalhamentoVaga} DTO contendo os dados recuperados do banco de dados.
 */
   @GetMapping
-  public ResponseEntity<Page<DetalhamentoVagaDTO>> listar(@PageableDefault(size = 10, sort = { "titulo" }) Pageable paginacao) {
+  public ResponseEntity<Page<ExibirVagaDTO>> listar(@PageableDefault(size = 10, sort = { "titulo" }) Pageable paginacao) {
 
     var page = vagaService.listar(paginacao);
     return ResponseEntity.ok(page);

@@ -1,5 +1,7 @@
 package br.com.plataformaDeEmpregos.dtos.empresa;
 
+import org.springframework.hateoas.Links;
+
 import br.com.plataformaDeEmpregos.models.contato.ContatoModel;
 import br.com.plataformaDeEmpregos.models.empresa.EmpresaModel;
 import br.com.plataformaDeEmpregos.models.endereco.EnderecoModel;
@@ -16,7 +18,8 @@ public record DetalhamentoEmpresaDTO(
   String razaoSocial,
   String nomeFantasia,
   ContatoModel contato,
-  EnderecoModel endereco
+  EnderecoModel endereco,
+  Links links
 ) {
 
   public DetalhamentoEmpresaDTO(EmpresaModel empresa){
@@ -26,7 +29,8 @@ public record DetalhamentoEmpresaDTO(
       empresa.getRazaoSocial(),
       empresa.getNomeFantasia(),
       empresa.getContato(),
-      empresa.getEndereco()
+      empresa.getEndereco(),
+      empresa.getLinks()
     );
   }
 

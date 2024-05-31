@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+// import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,7 +61,6 @@ public class CurriculoController {
 
   // ----------- GET METHODS ----------------
 
-
 /**End point para obter a lista de curriculos cadastrados no banco de dados.
 * Devolve uma lista de curriculos cadastrados no banco de dados, com paginação e ordenação, se necessário.
 * @param paginacao Pageable - Objeto que contém informações sobre a paginação e ordenação da lista.
@@ -95,9 +95,11 @@ public class CurriculoController {
 * @return ResponseEntity.ok - Retorna um objeto ResponseEntity com o código de status HTTP 200 OK e o {@link ExibirCurriculoDTO} contém os dados recuperados do banco de dados.
 */
   @GetMapping("/{id}")
-  public ResponseEntity<ExibirCurriculoDTO> buscar(@PathVariable(value = "id") Long id) {
+  public ResponseEntity<DetalhamentoCurriculoDTO> buscar(@PathVariable(value = "id") Long id) {
     var curriculo = curriculoService.buscar(id);
-    return ResponseEntity.ok(curriculo);
+
+    return ResponseEntity.status(HttpStatus.OK).body(curriculo);
+    // return ResponseEntity.ok(curriculo);
   }
 
 // ----------- PUT METHODS ----------------

@@ -3,7 +3,7 @@ package br.com.plataformaDeEmpregos.models.curriculo;
 import java.io.Serializable;
 import java.util.List;
 
-// import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.RepresentationModel;
 
 import br.com.plataformaDeEmpregos.models.contato.ContatoModel;
 import br.com.plataformaDeEmpregos.models.endereco.EnderecoModel;
@@ -18,7 +18,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
+// import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,9 +36,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
-public class CurriculoModel implements Serializable{
-// public class CurriculoModel extends RepresentationModel<CurriculoModel> implements Serializable{
+// @EqualsAndHashCode(of = "id")
+public class CurriculoModel extends RepresentationModel<CurriculoModel> implements Serializable{
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

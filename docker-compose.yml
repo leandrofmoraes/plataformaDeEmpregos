@@ -7,7 +7,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
-      MYSQL_DATABASE: db_proj_casa_um
+      MYSQL_DATABASE: db_plataforma_empregos
     ports:
       - "3306:3306"
     networks:
@@ -18,8 +18,8 @@ services:
       interval: 3s
       timeout: 30s
   plataformadecurriculos:
-    image: plataformadecurriculos:0.1.1
-    container_name: plataforma-de-curriculos
+    image: plataformadeempregos:0.0.1
+    container_name: plataforma-de-empregos
     # depends_on:
     #   - mysql
     depends_on:
@@ -28,7 +28,7 @@ services:
     # restart: on-failure
     environment:
       JAVA_OPTS: -Dspring.profiles.active=prod
-      DATASOURCE_URL: jdbc:mysql://mysql:3306/db_proj_casa_um
+      DATASOURCE_URL: jdbc:mysql://mysql:3306/db_plataforma_empregos
       DATASOURCE_USERNAME: root
       DATASOURCE_PASSWORD: root
     ports:

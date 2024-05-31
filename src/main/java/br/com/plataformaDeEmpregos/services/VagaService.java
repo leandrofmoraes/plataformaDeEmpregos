@@ -3,17 +3,23 @@ package br.com.plataformaDeEmpregos.services;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import br.com.plataformaDeEmpregos.controllers.VagaController;
 import br.com.plataformaDeEmpregos.dtos.vaga.AtualizacaoVagaDTO;
 import br.com.plataformaDeEmpregos.dtos.vaga.CadastroVagaDTO;
 import br.com.plataformaDeEmpregos.dtos.vaga.DadosVagaDTO;
 import br.com.plataformaDeEmpregos.dtos.vaga.DetalhamentoVagaDTO;
+import br.com.plataformaDeEmpregos.dtos.vaga.ExibirVagaDTO;
 import br.com.plataformaDeEmpregos.models.vagas.VagaModel;
 import br.com.plataformaDeEmpregos.repositories.EmpresaRepository;
 import br.com.plataformaDeEmpregos.repositories.VagaRepository;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 /**
 * Classe de serviço que instancia a classe que representa a entidade Vaga.
@@ -70,7 +76,8 @@ public class VagaService {
       vaga.getHabilidadesRequeridas(),
       vaga.getDescricao(),
       vaga.getSalario(),
-      vaga.getDataPublicacao()
+      vaga.getDataPublicacao(),
+      null //Sem links
     );
 
     return detalhesDaVaga;
@@ -117,12 +124,34 @@ public class VagaService {
     vagaRepository.deleteById(id);
   }
 
-  public Page<DetalhamentoVagaDTO> listar(Pageable paginacao) {
-    return vagaRepository.findAllByAtivoTrue(paginacao).map(DetalhamentoVagaDTO::new);
+  public Page<ExibirVagaDTO> listar(Pageable paginacao) {
+    var listaDeVagas = vagaRepository.findAllByAtivoTrue(paginacao);
+
+    listaDeVagas.forEach(empresa -> {
+      Long id = empresa.getId();
+      empresa
+        .add(
+          linkTo(methodOn(VagaController.class)
+          .buscar(id))
+          .withRel("Detalhar Vaga")
+        );
+    });
+
+    return listaDeVagas.map(ExibirVagaDTO::new);
   }
 
   public DetalhamentoVagaDTO buscar(Long id) {
     var vaga = vagaRepository.getReferenceById(id);
+
+    var paginacao = PageRequest.of(0, 10, Sort.by("titulo"));
+
+    vaga
+      .add(
+        linkTo(methodOn(VagaController.class)
+        .listar(paginacao))
+        .withRel("Lista de Vagas")
+      );
+
     return new DetalhamentoVagaDTO(vaga);
   }
 }

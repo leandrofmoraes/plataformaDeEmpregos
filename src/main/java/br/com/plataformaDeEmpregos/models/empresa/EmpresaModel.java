@@ -3,7 +3,7 @@ package br.com.plataformaDeEmpregos.models.empresa;
 import java.io.Serializable;
 import java.util.List;
 
-// import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.RepresentationModel;
 
 // import br.com.plataformaDeEmpregos.dtos.empresa.AtualizacaoEmpresaDTO;
 import br.com.plataformaDeEmpregos.dtos.empresa.CadastroEmpresaDTO;
@@ -22,9 +22,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
-// import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
+// import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -42,9 +41,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
-public class EmpresaModel implements Serializable {
-// public class EmpresaModel extends RepresentationModel<EmpresaModel> implements Serializable {
+// @EqualsAndHashCode(of = "id")
+public class EmpresaModel extends RepresentationModel<EmpresaModel> implements Serializable {
 
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;

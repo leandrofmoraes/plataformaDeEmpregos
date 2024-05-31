@@ -1,6 +1,5 @@
 package br.com.plataformaDeEmpregos.dtos.vaga;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.hateoas.Links;
@@ -14,22 +13,17 @@ import br.com.plataformaDeEmpregos.models.vagas.VagaModel;
 * @author Leandro F. Moraes
 *
 */
-public record DetalhamentoVagaDTO(
+public record ExibirVagaDTO(
   Long id,
   String titulo,
   String cargo,
   FormatoDeTrabalho formatoDeTrabalho,
   String nomeEmpresa,
   String cidade,
-  String formacaoRequerida,
-  Integer experienciaRequerida,
-  String habilidadesRequeridas,
-  String descricao,
-  BigDecimal salario,
   LocalDate dataPublicacao,
   Links links
 ){
-  public DetalhamentoVagaDTO(VagaModel vaga){
+  public ExibirVagaDTO(VagaModel vaga){
     this(
       vaga.getId(),
       vaga.getTitulo(),
@@ -37,11 +31,6 @@ public record DetalhamentoVagaDTO(
       vaga.getFormatoDeTrabalho(),
       vaga.getEmpresa().getNomeFantasia(),
       vaga.getEmpresa().getEndereco().getCidade(),
-      vaga.getFormacaoRequerida(),
-      vaga.getExperienciaRequerida(),
-      vaga.getHabilidadesRequeridas(),
-      vaga.getDescricao(),
-      vaga.getSalario(),
       vaga.getDataPublicacao(),
       vaga.getLinks()
     );

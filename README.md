@@ -2,8 +2,15 @@
 
 
 ### Descrição:
-Solução em Tecnologia da informação: API REST para cadastro de currículos e vagas de emprego.
+Projeto de uma API RESTful para cadastro de currículos, empresas e vagas de emprego.
 
+### Objetivo e Desenvolvimento:
+
+Este projeto foi criado com o objetivo de aprofundar o conhecimento em APIs RESTful e aplicar a utilização de ferramentas e tecnologias modernas que facilitam o desenvolvimento de aplicações web.
+_O projeto está em fase de desenvolvimento, portanto não é recomendado para uso em produção._
+
+#### Tecnologias utilizadas:
+Java 17, Spring Boot, Spring Data JPA, Spring Security, Hateoas, Lombok, MySQL, Flyway, Junit, Mockito, Swagger, Docker e Git/GitHub.
 
 #### 1 - Dependências:
 - [Java 17](https://www.java.com/pt-BR/download/manual.jsp)
@@ -66,3 +73,9 @@ curl -X POST -H "Authorization: <substitua-pelo-token-gerado>" -H "Content-Type:
 ```url
 http://localhost:8080/swagger-ui/index.html
 ```
+
+### Entre em Contato
+
+- Para dúvidas ou sugestões, sinta-se à vontade para entrar em contato comigo através do meu email.
+
+- Você também pode reportar bugs, solicitar novas funcionalidades ou fazer perguntas na aba de [issues](https://github.com/leandrofmoraes/plataformaDeEmpregos/issues) do projeto.

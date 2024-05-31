@@ -3,6 +3,8 @@ package br.com.plataformaDeEmpregos.dtos.curriculo;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.hateoas.Links;
+
 import br.com.plataformaDeEmpregos.models.curriculo.CurriculoModel;
 import br.com.plataformaDeEmpregos.models.curriculo.DadosProfissionaisModel;
 import br.com.plataformaDeEmpregos.models.curriculo.Formacao;
@@ -24,7 +26,8 @@ public record ExibirCurriculoDTO(
   LocalDate dataNascimento,
   String nacionalidade,
   Formacao formacao,
-  List<DadosProfissionaisModel> dadosProfissionais
+  List<DadosProfissionaisModel> dadosProfissionais,
+  Links link
 ){
 
   public ExibirCurriculoDTO(CurriculoModel curriculo){
@@ -37,7 +40,8 @@ public record ExibirCurriculoDTO(
       curriculo.getDadosPessoais().getDataNascimento(),
       curriculo.getDadosPessoais().getNacionalidade(),
       curriculo.getFormacao(),
-      curriculo.getDadosProfissionais()
+      curriculo.getDadosProfissionais(),
+      curriculo.getLinks()
     );
   }
 }

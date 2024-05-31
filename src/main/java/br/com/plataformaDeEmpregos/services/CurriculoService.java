@@ -6,9 +6,13 @@ import java.util.stream.Collectors;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+// import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import br.com.plataformaDeEmpregos.controllers.CurriculoController;
 import br.com.plataformaDeEmpregos.dtos.curriculo.AtualizacaoCurriculoDTO;
 import br.com.plataformaDeEmpregos.dtos.curriculo.CurriculoDTO;
 import br.com.plataformaDeEmpregos.dtos.curriculo.DetalhamentoCurriculoDTO;
@@ -21,6 +25,8 @@ import br.com.plataformaDeEmpregos.models.curriculo.Formacao;
 import br.com.plataformaDeEmpregos.models.endereco.EnderecoModel;
 import br.com.plataformaDeEmpregos.repositories.CurriculoRepository;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 /**
 * Classe de serviço que cria uma entidade Curriculo e abstrai as operações se salvar no banco de dados através da interface repository.
@@ -73,12 +79,43 @@ public class CurriculoService{
   }
 
   public Page<ExibirCurriculoDTO> listar(Pageable paginacao){
-    return curriculoRepository.findAllByAtivoTrue(paginacao).map(ExibirCurriculoDTO::new);
+
+    Page<CurriculoModel> listaDeCurriculo = curriculoRepository.findAllByAtivoTrue(paginacao);//.map(ExibirCurriculoDTO::new);
+
+    listaDeCurriculo.forEach(curriculo -> {
+      Long id = curriculo.getId();
+      curriculo
+        .add(
+          linkTo(methodOn(CurriculoController.class)
+          .buscar(id))
+          .withRel("Detalhar Curriculo")
+        );
+    });
+
+    Page<ExibirCurriculoDTO> exibirCurriculo = listaDeCurriculo.map(ExibirCurriculoDTO::new);
+
+    // return new PageImpl<ExibirCurriculoDTO>(
+    //   exibirCurriculo,
+    //   listaDeCurriculo.getPageable(),
+    //   listaDeCurriculo.getTotalElements());
+
+    return exibirCurriculo;
   }
 
-  public ExibirCurriculoDTO buscar(Long id) {
+  public DetalhamentoCurriculoDTO buscar(Long id) {
+
     var curriculo = curriculoRepository.getReferenceById(id);
-    return new ExibirCurriculoDTO(curriculo);
+
+    var paginacao = PageRequest.of(0, 10, Sort.by("dadosPessoais.nome"));
+
+    curriculo
+      .add(
+        linkTo(methodOn(CurriculoController.class)
+        .listar(paginacao))
+        .withRel("Lista de Curriculos")
+      );
+
+    return new DetalhamentoCurriculoDTO(curriculo);
   }
 
 }

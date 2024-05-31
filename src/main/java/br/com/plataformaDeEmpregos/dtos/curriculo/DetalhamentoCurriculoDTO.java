@@ -2,6 +2,8 @@ package br.com.plataformaDeEmpregos.dtos.curriculo;
 
 import java.util.List;
 
+import org.springframework.hateoas.Links;
+
 import br.com.plataformaDeEmpregos.models.contato.ContatoModel;
 import br.com.plataformaDeEmpregos.models.curriculo.CurriculoModel;
 import br.com.plataformaDeEmpregos.models.curriculo.DadosPessoais;
@@ -21,7 +23,8 @@ public record DetalhamentoCurriculoDTO(
   ContatoModel contato,
   EnderecoModel endereco,
   Formacao formacao,
-  List<DadosProfissionaisModel> dadosProfissionais
+  List<DadosProfissionaisModel> dadosProfissionais,
+  Links links
 ){
 
   public DetalhamentoCurriculoDTO(CurriculoModel curriculo){
@@ -31,7 +34,8 @@ public record DetalhamentoCurriculoDTO(
       curriculo.getContato(),
       curriculo.getEndereco(),
       curriculo.getFormacao(),
-      curriculo.getDadosProfissionais()
+      curriculo.getDadosProfissionais(),
+      curriculo.getLinks()
     );
   }
 }
